@@ -1,5 +1,7 @@
 import os
 
+from datetime import timedelta
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -30,10 +32,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'boards.apps.BoardsConfig',
-    'cards.apps.CardsConfig',
-    'comments.apps.CommentsConfig',
-    'lists.apps.ListsConfig',
+    'boards',
+    'cards',
+    'comments',
+    'lists',
 ]
 
 MIDDLEWARE = [
@@ -119,3 +121,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
